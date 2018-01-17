@@ -1,0 +1,15 @@
+sudo: false
+language: go
+go:
+  - 1.6
+  - 1.7
+  - 1.8
+  - tip
+before_install:
+  - go install github.com/go-chi/chi
+  #- go get golang.org/x/tools/cmd/cover
+  - go get github.com/golang/lint/golint
+script:
+  - go test -v -race -covermode=atomic -coverprofile=coverage.txt
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
